@@ -1,7 +1,7 @@
 package com.yxtec.t6.model;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-@Builder
+@NoArgsConstructor
 public class Score implements Serializable {
 
     private static final long serialVersionUID = 7614293838845782729L;

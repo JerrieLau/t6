@@ -32,11 +32,12 @@ public class DbRepository {
     public List<Score> queryAll() {
         return jdbcTemplate.query("select * from scores", new RowMapper<Score>() {
             public Score mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return Score.builder()
-                        .id(rs.getLong("id"))
-                        .sname(rs.getString("sname"))
-                        .course(rs.getString("course"))
-                        .score(rs.getFloat("score")).build();
+                Score score = new Score();
+                score.setId(rs.getLong("id"));
+                score.setSname(rs.getString("sname"));
+                score.setCourse(rs.getString("course"));
+                score.setScore(rs.getFloat("score"));
+                return score;
             }
         });
     }

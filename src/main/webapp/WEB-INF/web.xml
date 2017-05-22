@@ -5,26 +5,37 @@
          version="3.1"
          metadata-complete="true">
 
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <!--其他Bean还是在applicationContext中配置装载-->
-        <param-value>classpath:applicationContext.xml</param-value>
-    </context-param>
 
+    <!--
+        2、配置SpringMVC的核心DispatcherServlet，只装载SpringMVC相关的Bean
+    -->
     <servlet>
         <servlet-name>t6</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--定义SpringMVC配置文件-->
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <!--只装载SpringMVC相关的Bean-->
             <param-value>classpath:t6-servlet.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>t6</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+    <!--
+        1、装载applicationContext，其实现了ServletContextListener，其他Bean还是在applicationContext中配置装载
+    -->
+    <!--定义ContextLoaderListener需要的参数contextConfigLocation（即用于指定applicationContext.xml的位置），-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+    <!---->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
 
 </web-app>
