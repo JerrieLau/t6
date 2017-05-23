@@ -1,4 +1,4 @@
-package com.yxtec.t6.web;
+package com.yxtec.t6.web.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

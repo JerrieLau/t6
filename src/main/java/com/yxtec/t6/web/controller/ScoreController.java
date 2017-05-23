@@ -1,18 +1,17 @@
-package com.yxtec.t6.web;
+package com.yxtec.t6.web.controller;
 
 import com.yxtec.t6.model.Score;
 import com.yxtec.t6.service.ScoreService;
-import org.springframework.beans.BeansException;
+import com.yxtec.t6.web.token.Tokenizer;
+import com.yxtec.t6.web.token.TokenizerType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -35,6 +34,7 @@ public class ScoreController {
         return modelAndView;
     }
 
+    @Tokenizer(type = TokenizerType.CREATOR)
     @RequestMapping(value = "/new", method = {RequestMethod.GET})
     public ModelAndView newPage() {
         ModelAndView modelAndView = new ModelAndView();
@@ -42,8 +42,9 @@ public class ScoreController {
         return modelAndView;
     }
 
+    @Tokenizer(type = TokenizerType.VALIDATOR)
     @RequestMapping(value = "/", method = {RequestMethod.POST})
-    public ModelAndView put(Score score) {
+    public ModelAndView put(@Valid Score score) {
         scoreService.save(score);
         return list();
     }
