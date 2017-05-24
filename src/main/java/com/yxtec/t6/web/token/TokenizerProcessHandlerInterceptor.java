@@ -49,7 +49,7 @@ public class TokenizerProcessHandlerInterceptor implements HandlerInterceptor {
                         }
                     } else {
                         LOGGER.error("从会话中获取出的token为{}，请检查前一页面是否放入token!", tokenObject);
-                        throw new IllegalStateException("从会话过期，请回退后刷新重试!");
+                        throw new IllegalStateException("会话过期，请回退后刷新重试!");
                     }
                 }
             }
